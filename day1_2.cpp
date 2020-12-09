@@ -3,48 +3,34 @@
 using namespace std;
 using ll = long long;
 
-int indexOf(int x);
-vector<int> v;
-
 int main(){
+	vector<int> v;
 	int target = 2020;
 	int temp;
 	while(cin >> temp) v.push_back(temp);
 
 	sort(v.begin(), v.end());
 
-	int n, third, id1, id2, id3;
+	int n, total;
 	n = v.size();
-	for(int i = 0; i < n; ++i){
+	for(int i = 0; i < n-2; ++i){
 		bool found = false;
-		for(int j = i+1; j < n; ++j){
-			third = target-v[i]-v[j];
-			id3 = indexOf(third);
-			if (id3 != -1){
+		int a = v[i], j = i+1, k = n-1;
+		while(j < k){
+			int b = v[j], c = v[k];
+			total = a+b+c;
+			if (total<target) j++;
+			else if (total>target) k--;
+			else{
 				found = true;
-				id1 = i; id2 = j;
+				ll ans = (ll) a*b*c;
+				cout << ans;
 				break;
 			}
 		}
 		if (found) break;
 	}
 
-	ll ans = (ll) v[id1]*v[id2]*v[id3];
-
-	cout << ans;
-
 	return 0;
 }
 
-int indexOf(int x){
-	int l = 0, r = v.size()-1, m;
-	while(l <= r){
-		m = l + (r-l)/2;
-		if (v[m]==x) return m;
-
-		if (v[m]<x) l = m+1;
-		else r = m-1;
-	}
-
-	return -1;
-}
