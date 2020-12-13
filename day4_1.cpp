@@ -12,7 +12,7 @@ int main(){
 			replace(data.begin(), data.end(), ':', ' ');
 			stringstream ss(data);
 			while(ss >> type){
-				ss >> data;
+				ss >> content;
 				if(type=="cid") haveCid = true;
 				size++;
 			}
